@@ -3,4 +3,8 @@
 *.iml
 /*.iml
 target
+<<<<<<< HEAD
 **/target
+=======
+**/target
+>>>>>>> af79c81f6e416dd0090b1840b28ea15df60538b4
