@@ -20,10 +20,10 @@ public class MiningService {
     private static final int difficulty = 1;
 
     @Autowired
-    TransactionService transactionService;
+    private TransactionService transactionService;
 
     @Autowired
-    BlockService blockService;
+    private BlockService blockService;
 
     public boolean startMining(User user) throws Exception {
         logger.info("Calling startMining");
@@ -71,6 +71,7 @@ public class MiningService {
             }
         }
         notConfirmedTransaction.setTransactionStatus((byte) 1);
+        notConfirmedTransaction.setBlock(block);
         block.getTransactions().add(notConfirmedTransaction);
         logger.info("Transaction Successfully added to Block");
         return true;
@@ -119,7 +120,7 @@ public class MiningService {
         Block genesisBlock = Block.builder()
                 .previousHash("0")
                 .timeStamp(new Date().getTime())
-                .transactions(null)
+                .transactions(new ArrayList<>())
                 .build();
         genesisBlock.setHash(calculateHash(genesisBlock));
         logger.info("Created genesis block, id = {}", genesisBlock.getHash());

@@ -1,9 +1,6 @@
 package by.it.academy.pojo;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,10 +22,10 @@ public class Transaction {
     @GenericGenerator(name = "system-uuid", strategy = "uuid")
     private String transactionId;
 
-    @Column(columnDefinition="MEDIUMBLOB")
+    @Column(columnDefinition = "MEDIUMBLOB")
     private PublicKey senderPublicKey;
 
-    @Column(columnDefinition="MEDIUMBLOB")
+    @Column(columnDefinition = "MEDIUMBLOB")
     private PublicKey recipientPublicKey;
 
     private String senderPublicKeyString;
@@ -45,6 +42,7 @@ public class Transaction {
     private byte transactionStatus;
 
     @ManyToOne
+    @ToString.Exclude
     private Block block;
 
     private static int sequence = 0;

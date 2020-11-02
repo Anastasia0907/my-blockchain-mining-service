@@ -17,7 +17,7 @@ public class MiningController {
     private static final Logger logger = LoggerFactory.getLogger(MiningController.class);
 
     @Autowired
-    MiningService miningService;
+    private MiningService miningService;
 
     @PostMapping(value = "/start-mining")
     public ResponseEntity startMining(
@@ -26,11 +26,10 @@ public class MiningController {
         logger.info("Calling startMining - POST");
         logger.info("Miner - user {}", user.getUserName());
 
-        if(miningService.startMining(user)){
-            return new ResponseEntity(HttpStatus.OK);
-        } else {
-            return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+        miningService.startMining(user);
+
+        return new ResponseEntity(HttpStatus.OK);
+
 
     }
 }
